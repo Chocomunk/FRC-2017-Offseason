@@ -17,47 +17,7 @@ import java.util.Optional;
  * Should only be used in robot package.
  */
 class HardwareUpdater {
-	public HardwareSensorLoop getHardwareSensorLoop() {
-		return new HardwareSensorLoop();
-	}
-	public HardwareEnabledLoop getHardwareEnabledLoop() {
-		return new HardwareEnabledLoop();
-	}
-	
-	
-	public class HardwareSensorLoop implements Loop {
-		@Override
-		public void update() {
-			updateSensors(mRobot.getRobotState());
-		}
 
-		@Override
-		public void onStart() {
-		}
-
-		@Override
-		public void onStop() {
-		}
-	}
-	
-	public class HardwareEnabledLoop implements Loop {
-		public HardwareEnabledLoop() {
-			
-		}
-		@Override
-		public void update() {
-			updateHardware();
-		}
-
-		@Override
-		public void onStart() {			
-		}
-
-		@Override
-		public void onStop() {
-		}
-	}
-	
 	// Subsystem references
 	
 	private Drive mDrive;

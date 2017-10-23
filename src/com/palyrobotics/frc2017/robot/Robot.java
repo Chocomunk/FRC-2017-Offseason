@@ -28,9 +28,6 @@ public class Robot extends IterativeRobot {
 	
 
 	private OperatorInterface operatorInterface = OperatorInterface.getInstance();
-	// Instantiate separate thread controls
-	//private SubsystemLooper mSubsystemLooper = new SubsystemLooper();
-	// Instantiate hardware updaters
 	private RoutineManager mRoutineManager = new RoutineManager();
 
 	// Subsystem controllers
@@ -51,7 +48,7 @@ public class Robot extends IterativeRobot {
 	public void robotInit() {
 		System.out.println("Start robotInit() for "+Constants.kRobotName.toString());
 		DashboardManager.getInstance().robotInit();
-		AndroidConnectionHelper.getInstance().start();
+		//AndroidConnectionHelper.getInstance().start();
 		System.out.println("Finished starting");
 		mLogger.setFileName("8/20 testing");
 		mLogger.start();
@@ -126,12 +123,6 @@ public class Robot extends IterativeRobot {
 
 	@Override
 	public void autonomousPeriodic() {
-//		HardwareAdapter.getInstance().getSlider().sliderTalon.changeControlMode(CANTalon.TalonControlMode.Position);
-//		HardwareAdapter.getInstance().getSlider().sliderTalon.set(1);
-//		System.out.println("Talon stpt:"+HardwareAdapter.getInstance().getSlider().sliderTalon.getSetpoint());
-//		System.out.println("Talon mode:"+HardwareAdapter.getInstance().getSlider().sliderTalon.getControlMode());
-		//		logPeriodic();
-//		System.out.println(robotState.sliderEncoder);
 		mLogger.logRobotThread("Nexus xdist: "+AndroidConnectionHelper.getInstance().getXDist());
 		commands = mRoutineManager.update(commands);
 		mHardwareUpdater.updateSensors(robotState);
