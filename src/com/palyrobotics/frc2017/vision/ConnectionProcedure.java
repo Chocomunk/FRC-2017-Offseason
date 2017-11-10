@@ -1,5 +1,5 @@
 package com.palyrobotics.frc2017.vision;
 
-public class ConnectionProcedure {
+public class ConnectionProcedure extends TimeoutHandler{
 
 }
