@@ -1,41 +1,71 @@
-//Still needs lot of improvement(it is very wrong I know) 
-//But now we have actual stuff to work on
-
 package com.palyrobotics.frc2017.vision;
 
-public class TimeoutHandler implements TimeoutProcedureBase {
-	//Different types of timeouts
-	public static int numFailures = 0;
-	
+
+
+public class TimeoutHandler extends TimeoutProcedureBase {
+
+//TODO: More in depth README, add more methods into TimeoutProcedureBase instead of TimeoutHandler
+
 	public enum TimeoutType{
-		LINEAR, DEFAULT;
+		LINEAR, 
+		DEFAULT;
 	}
-	TimeoutHandler defaultCase = new TimeoutHandler(); 
-	//get is still really sus and I know it's wrong and needs lot of improvement :)
-	public TimeoutProcedureBase get(String key, TimeoutType currTimeout){
-		if (key == "nexus_connected"){
-			TimeoutHandler nexus = new TimeoutHandler(); 
-			return nexus; 
-		}
-		else if (key == null){
-			return defaultCase;
-		}
-		else{
-			return defaultCase;
-		}
-	}
+	
+	public int initialMill = 0; 
+	
+	/**
+	* Resets the number of failures to 0
+	*/
 	public void success(){
 		numFailures = 0; 
 	}
+	
+	/**
+	* Increments the number of failures
+	* Sleeps the code based on the number of failures
+	*/
 	public void failure(){
 		numFailures++;
 		try {
-			Thread.sleep(numFailures);
-		} 
-		catch (InterruptedException e) {
-			// TODO Auto-generated catch block
+			Thread.sleep(getFailureTime(numFailures));
+			System.out.println(getFailureTime(numFailures) - initialMill);
+		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
 	}
-
+	
+	/**
+	* Returns a unique timeout instance
+	* @param key
+	* @param currTimeoutType
+	* @return TimeoutProcedureBase
+	*/
+	public static TimeoutHandler get(String key, TimeoutType currTimeoutType){
+		if(currTimeoutType == null){
+			currTimeoutType = TimeoutType.DEFAULT;
+		}
+		
+		if (key == "nexus_connected"){
+			currTimeoutType = TimeoutType.LINEAR;
+			TimeoutHandler nexus = new TimeoutHandler(); 
+			return nexus; 
+		}
+		else{
+			key = "key for default??";
+			TimeoutHandler newHandler = new TimeoutHandler(); 
+			return newHandler; 
+		}
+	
+	
+	}
+	
+	/**
+	* Function of the count of failures
+	* @param numFailures
+	* @return sleep time
+	*/
+	public int getFailureTime(int numFailures){
+		return numFailures * 100; 
+	}
 }
+
