@@ -129,4 +129,12 @@ public class KalmanFilter {
 
         return new Matrix[] {finalX, finalP};
     }
+
+    public Matrix getX() {
+        return this.X;
+    }
+
+    public Matrix getP() {
+        return this.P;
+    }
 }

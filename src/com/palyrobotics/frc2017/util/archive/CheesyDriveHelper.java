@@ -181,8 +181,8 @@ public class CheesyDriveHelper {
 			rightPwm = -1.0;
 		}
 		DriveSignal mSignal = DriveSignal.getNeutralSignal();
-		mSignal.leftMotor.setPercentVBus(leftPwm);
-		mSignal.rightMotor.setPercentVBus(rightPwm);
+		mSignal.leftMotor.setVoltage(leftPwm*12.0);
+		mSignal.rightMotor.setVoltage(rightPwm*12.0);
 		return mSignal;
 	}
 

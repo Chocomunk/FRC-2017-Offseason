@@ -6,6 +6,7 @@ import com.kauailabs.navx.frc.AHRS;
 import com.palyrobotics.frc2017.config.Constants;
 import com.palyrobotics.frc2017.config.Constants.RobotName;
 import com.palyrobotics.frc2017.config.RobotState;
+import com.palyrobotics.frc2017.config.dashboard.DashboardManager;
 import com.palyrobotics.frc2017.robot.team254.lib.util.Loop;
 import com.palyrobotics.frc2017.subsystems.*;
 import com.palyrobotics.frc2017.util.CANTalonOutput;
@@ -357,6 +358,10 @@ class HardwareUpdater {
 	private void updateDrivetrain() {
 		updateCANTalonSRX(HardwareAdapter.getInstance().getDrivetrain().leftMasterTalon, mDrive.getDriveSignal().leftMotor);
 		updateCANTalonSRX(HardwareAdapter.getInstance().getDrivetrain().rightMasterTalon, mDrive.getDriveSignal().rightMotor);
+
+		setCanTableString(new double[] {HardwareAdapter.getInstance().kBuiltInAccelerometer.getY(), mDrive.getDriveSignal().leftMotor.getSetpoint()});
+
+		DashboardManager.getInstance().updateCANTable(getCanTableString());
 	}
 
 	/**
@@ -372,5 +377,19 @@ class HardwareUpdater {
 			talon.setMotionMagicCruiseVelocity(output.cruiseVel);
 		}
 		talon.set(output.getSetpoint());
+	}
+
+	private String canTableString = "";
+
+	private void setCanTableString(double[] a) {
+		canTableString = "";
+		for(int i = 0; i < a.length-1; i++) {
+			canTableString = canTableString + Double.toString(a[i]) + ", ";
+		}
+		canTableString = canTableString + Double.toString(a[a.length-1]);
+	}
+
+	public String getCanTableString() {
+		return this.canTableString;
 	}
 }

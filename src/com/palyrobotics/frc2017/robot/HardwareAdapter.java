@@ -190,6 +190,8 @@ public class HardwareAdapter {
 	
 	public final PowerDistributionPanel kPDP = new PowerDistributionPanel();
 
+	public final BuiltInAccelerometer kBuiltInAccelerometer = new BuiltInAccelerometer();
+
 	// Singleton set up
 	private static final HardwareAdapter instance = new HardwareAdapter();
 
