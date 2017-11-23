@@ -359,7 +359,7 @@ class HardwareUpdater {
 		updateCANTalonSRX(HardwareAdapter.getInstance().getDrivetrain().leftMasterTalon, mDrive.getDriveSignal().leftMotor);
 		updateCANTalonSRX(HardwareAdapter.getInstance().getDrivetrain().rightMasterTalon, mDrive.getDriveSignal().rightMotor);
 
-		setCanTableString(new double[] {HardwareAdapter.getInstance().kBuiltInAccelerometer.getY(), mDrive.getDriveSignal().leftMotor.getSetpoint()});
+		setCanTableString(new double[] {HardwareAdapter.getInstance().kBuiltInAccelerometer.getZ(), mDrive.getDriveSignal().leftMotor.getSetpoint()});
 
 		DashboardManager.getInstance().updateCANTable(getCanTableString());
 	}

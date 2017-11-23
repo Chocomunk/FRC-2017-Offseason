@@ -21,9 +21,7 @@ public class AccelerometerModel {
 
         Matrix B = Matrix.from1DArray(3, 1, new double[]{0.5*Math.pow(timeStep, 2), timeStep, 1.0});
 
-        //Starts at 1, changes later in order to keep adding a constant to measured accel
-        //INCOMPLETE - MEASURE STUFF
-        Matrix H = Matrix.from2DArray(new double[][]{{1, 0, 0}, {0, 1, 0}, {0, 0, 1}});
+        Matrix H = Matrix.from2DArray(new double[][]{{1, 0, 0, 0}, {0, 1, 0, 0}, {0, 0, 1, -1.12}, {0, 0, 0, 1}});
 
         //Guessed
         Matrix R = Matrix.from2DArray(new double[][]{{0.7, 0, 0}, {0, 0.7, 0}, {0, 0, 0.7}});
