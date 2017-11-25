@@ -328,6 +328,10 @@ class HardwareUpdater {
 		if (HardwareAdapter.getInstance().getSlider().sliderTalon != null) {
 			robotState.sliderPosition = HardwareAdapter.SliderHardware.getInstance().sliderTalon.getPosition();
 		}
+
+		//TODO: verify these are correct directions
+		robotState.drivePose.forwardAccel = -HardwareAdapter.getInstance().kBuiltInAccelerometer.getZ();
+		robotState.drivePose.rightAccel = HardwareAdapter.getInstance().kBuiltInAccelerometer.getX();
 	}
 
 	/**

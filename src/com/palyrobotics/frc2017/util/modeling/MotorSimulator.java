@@ -16,13 +16,14 @@ public class MotorSimulator {
     // Current motor state
     protected double m_position;
     protected double m_velocity;
+    protected double m_acceleration;
     protected double m_current;
 
     static MotorSimulator makeCIM() {
         final double KT = 2.41/131.0;
         final double KV = 5330.0*2*Math.PI/60.0/12.0;
         final double RESISTANCE = (12.0 / 131.0);
-        final double INERTIA = 0; //assume 0
+        final double INERTIA = 1; //assume 0
         return new MotorSimulator(KT, KV, RESISTANCE, INERTIA);
     }
 
@@ -61,7 +62,7 @@ public class MotorSimulator {
         m_resistance = resistance;
         m_motor_inertia = inertia;
 
-        reset(0, 0, 0);
+        reset(0, 0, 0, 0);
     }
 
     /**
@@ -85,9 +86,10 @@ public class MotorSimulator {
      * @param velocity
      * @param current
      */
-    public void reset(double position, double velocity, double current) {
+    public void reset(double position, double velocity, double acceleration, double current) {
         m_position = position;
         m_velocity = velocity;
+        m_acceleration = acceleration;
         m_current = current;
     }
 
@@ -117,6 +119,7 @@ public class MotorSimulator {
         load += m_motor_inertia;
         double acceleration = (applied_voltage - m_velocity / m_kv) * m_kt
                 / (m_resistance * load) + external_torque / load;
+        this.m_acceleration = acceleration;
         m_velocity += acceleration * timestep;
         m_position += m_velocity * timestep + .5 * acceleration * timestep
                 * timestep;
@@ -129,6 +132,10 @@ public class MotorSimulator {
 
     public double getVelocity() {
         return m_velocity;
+    }
+
+    public double getAcceleration() {
+        return m_acceleration;
     }
 
     public double getCurrent() {

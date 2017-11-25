@@ -133,6 +133,13 @@ public class Constants extends ConstantsBase {
 	public static double kSliderPeakOutputVoltage = 4.0; // closed loop limit
 	public static double kClimberMaxVoltage = 12.0;
 
+	//kg
+	public static double kRobotMass = 40.0;
+
+	//meters
+	public static double kWheelRadius = 0.05;
+
+
 	/* !!! End of editable Constants! !!!
 	 **********************************************************************************
 	 */

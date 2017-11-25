@@ -137,4 +137,24 @@ public class KalmanFilter {
     public Matrix getP() {
         return this.P;
     }
+
+    public Matrix getF() {
+        return this.F;
+    }
+
+    public Matrix getQ() {
+        return this.Q;
+    }
+
+    public Matrix getB() {
+        return this.B;
+    }
+
+    public Matrix getH() {
+        return this.H;
+    }
+
+    public Matrix getR() {
+        return this.R;
+    }
 }

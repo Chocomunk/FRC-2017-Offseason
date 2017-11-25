@@ -20,6 +20,9 @@ public class Pose {
 	public double rightEncVelocity;
 	public double rightSpeed;
 
+	public double forwardAccel;
+	public double rightAccel;
+
 	public Optional<Double> leftError;
 	public Optional<Double> rightError;
 	
@@ -33,12 +36,15 @@ public class Pose {
 		this.leftEnc = 0; this.leftEncVelocity = 0; this.leftSpeed = 0;
 		this.rightEnc = 0; this.rightEncVelocity = 0; this.rightSpeed = 0;
 		this.heading = 0; this.headingVelocity = 0;
+		this.forwardAccel = 0;
+		this.rightAccel = 0;
 		this.leftError = Optional.empty();
 		this.rightError = Optional.empty();
 	}
 	public Pose(double leftEnc, double leftEncVelocity, double leftSpeed,
 				double rightEnc, double rightEncVelocity, double rightSpeed,
-				double leftError, double rightError, double heading, double headingVelocity) {
+				double leftError, double rightError, double heading, double headingVelocity,
+				double forwardAccel, double rightAccel) {
 		this.leftEnc = leftEnc;
 		this.leftEncVelocity = leftEncVelocity;
 		this.leftSpeed = leftSpeed;
@@ -47,12 +53,15 @@ public class Pose {
 		this.rightSpeed = rightSpeed;
 		this.heading = heading;
 		this.headingVelocity = headingVelocity;
+		this.forwardAccel = forwardAccel;
+		this.rightAccel = rightAccel;
 		this.leftError = Optional.of(leftError);
 		this.rightError = Optional.of(rightError);
 	}
 	public Pose(double leftEnc, double leftEncVelocity, double leftSpeed,
 				double rightEnc, double rightEncVelocity, double rightSpeed,
-				double heading, double headingVelocity) {
+				double heading, double headingVelocity,
+				double forwardAccel, double rightAccel) {
 		this.leftEnc = leftEnc;
 		this.leftEncVelocity = leftEncVelocity;
 		this.leftSpeed = leftSpeed;
@@ -63,6 +72,8 @@ public class Pose {
 		this.headingVelocity = headingVelocity;
 		this.leftError = Optional.empty();
 		this.rightError = Optional.empty();
+		this.forwardAccel = forwardAccel;
+		this.rightAccel = rightAccel;
 	}
 
 	// TODO: Copy and equals methods
@@ -82,7 +93,8 @@ public class Pose {
 		copy.rightMotionMagicPos = (this.rightMotionMagicPos.isPresent()) ? Optional.of(this.rightMotionMagicPos.get()) : Optional.empty();
 		copy.leftMotionMagicVel = (this.leftMotionMagicVel.isPresent()) ? Optional.of(this.leftMotionMagicVel.get()) : Optional.empty();
 		copy.rightMotionMagicVel = (this.rightMotionMagicVel.isPresent()) ? Optional.of(this.rightMotionMagicVel.get()) : Optional.empty();
-
+		copy.forwardAccel = this.forwardAccel;
+		copy.rightAccel = this.rightAccel;
 		return copy;
 	}
 	
@@ -100,6 +112,8 @@ public class Pose {
 				this.leftMotionMagicPos == other.leftMotionMagicPos &&
 				this.rightMotionMagicPos == other.rightMotionMagicPos &&
 				this.leftMotionMagicVel == other.leftMotionMagicVel &&
-				this.rightMotionMagicVel == other.rightMotionMagicVel;
+				this.rightMotionMagicVel == other.rightMotionMagicVel &&
+				this.forwardAccel == other.forwardAccel &&
+				this.rightAccel == other.rightAccel;
 	}
 }

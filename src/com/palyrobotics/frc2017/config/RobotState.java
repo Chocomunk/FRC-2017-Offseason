@@ -29,7 +29,7 @@ public class RobotState {
 	public double totalVoltageDraw = 0;
 
 	// Pose stores drivetrain sensor data
-	public Pose drivePose = new Pose(0,0,0,0,0, 0, 0,0,0,0);
+	public Pose drivePose = new Pose(0,0,0,0,0,0,0,0,0,0,0,0);
 
 	// Slider
 	public double sliderPotentiometer = 0;
