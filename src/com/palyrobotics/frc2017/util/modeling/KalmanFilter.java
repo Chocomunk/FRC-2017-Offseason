@@ -1,7 +1,8 @@
 package com.palyrobotics.frc2017.util.modeling;
 
-import org.la4j.Matrix;
-import org.la4j.inversion.GaussJordanInverter;
+import org.opencv.core.Core;
+import org.opencv.core.Mat;
+import org.opencv.core.MatOfDouble;
 
 /**
  * Created by EricLiu on 11/20/17.
@@ -9,7 +10,6 @@ import org.la4j.inversion.GaussJordanInverter;
 public class KalmanFilter {
 
     public enum INFO {SENSOR, INPUT}
-
     /**
      * Modeling Matrices
      */
@@ -64,6 +64,7 @@ public class KalmanFilter {
      * @return {State, Covariance of State}
      */
     public Matrix[] update() {
+
         X = F.multiply(X);
         P = F.multiply(P).multiply(F.transpose()).add(Q);
 
@@ -86,9 +87,8 @@ public class KalmanFilter {
                 X = F.multiply(X);
                 P = F.multiply(P).multiply(F.transpose()).add(Q);
 
-                GaussJordanInverter inverter = new GaussJordanInverter(R.add(H.multiply(P).multiply(H.transpose())));
 
-                Matrix K = P.multiply(H.transpose()).multiply(inverter.inverse());
+                Matrix K = P.multiply(H.transpose()).multiply((R.add(H.multiply(P).multiply(H.transpose()))).inverse());
 
                 finalX = X.add(K.multiply(x.subtract(H.multiply(X))));
                 finalP = P.subtract(K.multiply(H).multiply(P));
@@ -120,9 +120,7 @@ public class KalmanFilter {
         X = F.multiply(X).add(B.multiply(u));
         P = F.multiply(P).multiply(F.transpose()).add(Q);
 
-        GaussJordanInverter inverter = new GaussJordanInverter(R.add(H.multiply(P).multiply(H.transpose())));
-
-        Matrix K = P.multiply(H.transpose()).multiply(inverter.inverse());
+        Matrix K = P.multiply(H.transpose()).multiply((R.add(H.multiply(P).multiply(H.transpose()))).inverse());
 
         Matrix finalX = X.add(K.multiply(z.subtract(H.multiply(X))));
         Matrix finalP = P.subtract(K.multiply(H).multiply(P));

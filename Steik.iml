@@ -188,6 +188,5 @@
         <jarDirectory url="file://$USER_HOME$/wpilib/java/current/lib" recursive="true" type="SOURCES" />
       </library>
     </orderEntry>
-    <orderEntry type="library" exported="" name="la4j" level="project" />
   </component>
 </module>
