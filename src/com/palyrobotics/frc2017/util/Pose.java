@@ -38,8 +38,8 @@ public class Pose {
 		this.heading = 0; this.headingVelocity = 0;
 		this.forwardAccel = 0;
 		this.rightAccel = 0;
-		this.leftError = Optional.empty();
-		this.rightError = Optional.empty();
+		this.leftError = Optional.of(new Double(0));
+		this.rightError = Optional.of(new Double(0));
 	}
 	public Pose(double leftEnc, double leftEncVelocity, double leftSpeed,
 				double rightEnc, double rightEncVelocity, double rightSpeed,

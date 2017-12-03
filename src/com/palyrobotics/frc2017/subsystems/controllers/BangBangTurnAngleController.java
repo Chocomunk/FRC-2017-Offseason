@@ -51,7 +51,7 @@ public class BangBangTurnAngleController implements Drive.DriveController {
 	@Override
 	public Pose getSetpoint() {
 		mCachedPose.heading = mTargetHeading;
-		Pose setpoint = new Pose(0,0,0,0,0,0,0,0);
+		Pose setpoint = new Pose();
 		return mCachedPose;
 	}
 

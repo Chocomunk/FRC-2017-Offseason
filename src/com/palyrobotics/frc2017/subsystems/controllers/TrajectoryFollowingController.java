@@ -93,7 +93,7 @@ public class TrajectoryFollowingController implements Drive.DriveController {
 	@Override
 	public Pose getSetpoint() {
 		// TODO: what to return?
-		return new Pose(0,0,0,0,0,0,0,0);
+		return new Pose();
 	}
 
 	@Override

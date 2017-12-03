@@ -45,7 +45,7 @@ public class Drive extends Subsystem {
 	public final double kInchesToTicks;
 
 	// Cache poses to not be allocating at 200Hz
-	private Pose mCachedPose = new Pose(0, 0, 0, 0, 0, 0, 0, 0);
+	private Pose mCachedPose = new Pose();
 	// Cached robot state, updated by looper
 	private RobotState mCachedRobotState;
 	// Stores output
@@ -225,7 +225,7 @@ public class Drive extends Subsystem {
 	public Pose getPose() {
 		// If drivetrain has not had first update yet, return initial robot pose of 0,0,0,0,0,0
 		if(mCachedRobotState == null) {
-			return new Pose(0,0,0,0,0,0,0,0);
+			return new Pose();
 		}
 		return mCachedPose;
 	}

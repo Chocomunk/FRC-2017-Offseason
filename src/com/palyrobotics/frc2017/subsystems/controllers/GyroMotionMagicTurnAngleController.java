@@ -76,7 +76,7 @@ public class GyroMotionMagicTurnAngleController implements DriveController {
 
 	@Override
 	public Pose getSetpoint() {
-		return new Pose(0, 0, 0, 0, 0, 0, mTargetHeading, 0);
+		return new Pose(0, 0, 0, 0, 0, 0, 0, 0, mTargetHeading, 0, 0, 0);
 	}
 
 	@Override
