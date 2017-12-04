@@ -10,6 +10,7 @@ import com.palyrobotics.frc2017.subsystems.controllers.*;
 import com.palyrobotics.frc2017.util.Pose;
 import com.palyrobotics.frc2017.util.archive.CheesyDriveHelper;
 import com.palyrobotics.frc2017.util.archive.DriveSignal;
+import com.palyrobotics.frc2017.util.modeling.AccelerometerModel;
 import com.team254.lib.trajectory.Path;
 
 /**
@@ -18,6 +19,9 @@ import com.team254.lib.trajectory.Path;
  * @author Nihar
  */
 public class Drive extends Subsystem {
+	//TODO: delete
+	private String canTableString;
+
 	private static Drive instance = new Drive();
 	public static Drive getInstance() {
 		return instance;
@@ -55,6 +59,8 @@ public class Drive extends Subsystem {
 	
 	private DashboardValue leftEncoder;
 	private DashboardValue rightEncoder;
+
+	private AccelerometerModel accelerometerModel = new AccelerometerModel();
 	
 	private Drive() {
 		super("Drive");
@@ -107,6 +113,12 @@ public class Drive extends Subsystem {
 		switch(mState) {
 			case CHEZY:
 				setDriveOutputs(mCDH.cheesyDrive(commands, mCachedRobotState));
+				accelerometerModel.step(commands);
+//TODO: remove the cantables here
+				setCanTableString(new double[] {
+						accelerometerModel.getAccel(),
+						state.drivePose.forwardAccel
+				});
 				break;
 			case OFF_BOARD_CONTROLLER:
 				if (mController == null) {
@@ -256,5 +268,18 @@ public class Drive extends Subsystem {
 				"\nLeft Setpoint: " + mSignal.leftMotor.getSetpoint() + "\nRight Setpoint: " + mSignal.rightMotor.getSetpoint() +
 				"\nLeft Enc: "+mCachedPose.leftEnc + "\nRight Enc: "+mCachedPose.rightEnc+
 				"\nGyro: "+mCachedPose.heading+"\n";
+	}
+
+	//TODO: remove these two methods
+	private void setCanTableString(double[] a) {
+		canTableString = "";
+		for(int i = 0; i < a.length-1; i++) {
+			canTableString = canTableString + Double.toString(a[i]) + ", ";
+		}
+		canTableString = canTableString + Double.toString(a[a.length-1]);
+	}
+
+	public String getCanTableString() {
+		return this.canTableString;
 	}
 }

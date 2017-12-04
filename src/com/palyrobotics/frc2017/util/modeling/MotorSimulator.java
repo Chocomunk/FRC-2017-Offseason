@@ -126,16 +126,19 @@ public class MotorSimulator {
         m_current = load * acceleration * Math.signum(applied_voltage) / m_kt;
     }
 
+    //Converted to ft
     public double getPosition() {
-        return m_position;
+        return m_position/3.28084;
     }
 
+    //Converted to ft/s
     public double getVelocity() {
-        return m_velocity;
+        return m_velocity/3.28084;
     }
 
+    //Converted to ft/s^2
     public double getAcceleration() {
-        return m_acceleration;
+        return m_acceleration/3.28084;
     }
 
     public double getCurrent() {

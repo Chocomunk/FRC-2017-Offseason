@@ -70,6 +70,8 @@ public class RobotEnclosingThread {
 					mHardwareUpdater.updateHardware();
 					
 					Drive.getInstance().update(getCommands(), getRobotState());
+					//TODO: remove this dashboard manager call
+					DashboardManager.getInstance().updateCANTable(Drive.getInstance().getCanTableString());
 					Slider.getInstance().update(getCommands(), getRobotState());
 					Spatula.getInstance().update(getCommands(), getRobotState());
 					Climber.getInstance().update(getCommands(), getRobotState());
