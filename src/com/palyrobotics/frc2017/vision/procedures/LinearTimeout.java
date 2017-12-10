@@ -1,5 +1,9 @@
 package com.palyrobotics.frc2017.vision.procedures;
 
-public class LinearTimeout {
+import com.palyrobotics.frc2017.vision.TimeoutHandler;
 
+public class LinearTimeout extends TimeoutHandler {
+	public LinearTimeout(double baseValue, double scalarValue){
+		super(baseValue, scalarValue); 
+	}
 }
