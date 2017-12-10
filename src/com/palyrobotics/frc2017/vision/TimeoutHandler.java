@@ -43,7 +43,26 @@ public class TimeoutHandler extends TimeoutProcedureBase {
 	* @return TimeoutProcedureBase
 	*/
 	HashMap <TimeoutType, TimeoutProcedureBase> map = new HashMap<>(); 
-	public static TimeoutHandler get(String key, TimeoutType currTimeoutType){
+	public static TimeoutHandler get(HashMap map, TimeoutType currType, TimeoutProcedureBase currValue, double duration){
+		if (map.containsKey(currType)){
+			if(currType == TimeoutType.EXPONENTIAL){
+				TimeoutHandler output = new TimeoutHandler(double baseValue, double scalarValue); 
+			}
+			else if (currType == TimeoutType.LINEAR){
+				TimeoutHandler output = new TimeoutHandler(1)
+			}
+			else if (currType == TimeoutType.LOGARITHMIC){
+				
+			}
+		}
+		else{
+			//Should set to some default procedure type
+			map.put(currType, currValue); 
+		}
+		TimeoutHandler randomThing = new TimeoutHandler(0,0); 
+		return randomThing; 
+	}
+	/*public static TimeoutHandler get(String key, TimeoutType currTimeoutType){
 		if(currTimeoutType == null){
 			currTimeoutType = TimeoutType.DEFAULT;
 		}
@@ -60,7 +79,7 @@ public class TimeoutHandler extends TimeoutProcedureBase {
 		}
 	
 	
-	}
+	}*/ 
 	
 	/**
 	* Function of the count of failures
