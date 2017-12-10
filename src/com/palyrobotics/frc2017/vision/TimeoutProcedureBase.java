@@ -8,7 +8,7 @@ public abstract class TimeoutProcedureBase {
 		this.scalarValue = scalarValue; 
 	}
 	public void success(){
-		
+		succeed();
 	}
 	public void failure(){
 		
