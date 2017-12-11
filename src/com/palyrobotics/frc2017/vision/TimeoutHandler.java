@@ -28,15 +28,7 @@ public class TimeoutHandler extends TimeoutProcedureBase {
 	* Increments the number of failures
 	* Sleeps the code based on the number of failures
 	*/
-	public void failure(){
-		numFailures++;
-		try {
-			Thread.sleep(getFailureTime(numFailures));
-			System.out.println(getFailureTime(numFailures) - initialMill);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-	}
+	
 	
 	/**
 	* Returns a unique timeout instance
