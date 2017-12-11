@@ -1,13 +1,15 @@
 package com.palyrobotics.frc2017.vision;
 
 import java.util.HashMap;
+import com.palyrobotics.frc2017.vision.procedures.*; 
 
 public class TimeoutHandler extends TimeoutProcedureBase {
-
+	public static double baseValue; 
+	public static double scalarValue; 
 //TODO: More in depth README, add more methods into TimeoutProcedureBase instead of TimeoutHandler
 	public TimeoutHandler(double baseValue, double scalarValue){
 		 super(baseValue, scalarValue); 
-	}
+	} 
 	public enum TimeoutType{
 		EXPONENTIAL, 
 		LINEAR, 
@@ -42,22 +44,25 @@ public class TimeoutHandler extends TimeoutProcedureBase {
 	* @param currTimeoutType
 	* @return TimeoutProcedureBase
 	*/
-	HashMap <TimeoutType, TimeoutProcedureBase> map = new HashMap<>(); 
-	public static TimeoutHandler get(HashMap map, TimeoutType currType, TimeoutProcedureBase currValue, double duration){
-		if (map.containsKey(currType)){
-			if(currType == TimeoutType.EXPONENTIAL){
-				TimeoutHandler output = new TimeoutHandler(double baseValue, double scalarValue); 
-			}
-			else if (currType == TimeoutType.LINEAR){
-				TimeoutHandler output = new TimeoutHandler(1)
-			}
-			else if (currType == TimeoutType.LOGARITHMIC){
+	HashMap <TimeoutType, TimeoutProcedureBase> mTimeoutMap = new HashMap<>(); 
+	public static TimeoutHandler get(HashMap mTimeoutMap, TimeoutType key, TimeoutProcedureBase value){
+		if (!mTimeoutMap.containsKey(key)){
+			TimeoutHandler newThing = new TimeoutHandler(key,value); 
+		}
+		if (!mTimeoutMap.containsValue(value)){
+			switch(key){
+				case EXPONENTIAL: 
+					value = new ExponentialTimeout(baseValue,scalarValue); 
+				case LINEAR: 
+					value = new LinearTimeout(baseValue, scalarValue); 
+				case LOGARITHMIC: 
+					value = new LogarithmicTimeout(baseValue, scalarValue); 
 				
 			}
 		}
 		else{
 			//Should set to some default procedure type
-			map.put(currType, currValue); 
+			 
 		}
 		TimeoutHandler randomThing = new TimeoutHandler(0,0); 
 		return randomThing; 
