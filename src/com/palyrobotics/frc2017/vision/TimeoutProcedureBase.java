@@ -3,11 +3,9 @@ package com.palyrobotics.frc2017.vision;
 public abstract class TimeoutProcedureBase {
 	public double baseValue; 
 	public double scalarValue; 
-	public double duration;
-	public TimeoutProcedureBase(double baseValue, double scalarValue, double duration){
+	public TimeoutProcedureBase(double baseValue, double scalarValue){
 		this.baseValue = baseValue; 
 		this.scalarValue = scalarValue; 
-		this.duration = duration;
 	}
 	public void success(){
 		numFailures = 0;
@@ -16,19 +14,16 @@ public abstract class TimeoutProcedureBase {
 		numFailures++;
 	}
 	
-	private int getFailureTime(int failureCount) { // TODO: change multiplier constant based on procedure
+	private int getDuration(int failureCount) { // TODO: change multiplier constant based on type of procedure
 		return failureCount * 100;
 	}
 	public void doWait(){
 		try {
-			Thread.sleep(getFailureTime(numFailures));
-			System.out.println(getFailureTime(numFailures));
+			Thread.sleep(getDuration(numFailures));
+			System.out.println(getDuration(numFailures));
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-	}
-	public double getDuration(){
-		return duration; 
 	}
 	protected double getBaseValue(){
 		return baseValue; 

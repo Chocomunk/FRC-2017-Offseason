@@ -16,19 +16,7 @@ public class TimeoutHandler extends TimeoutProcedureBase {
 		LOGARITHMIC; 
 	}
 	TimeoutType currType; 
-	public int initialMill = 0; 
-	
-	/**
-	* Resets the number of failures to 0
-	*/
-	public void success(){
-		numFailures = 0; 
-	}
-	/**
-	* Increments the number of failures
-	* Sleeps the code based on the number of failures
-	*/
-	
+	public int initialMill = 0; 	
 	
 	/**
 	* Returns a unique timeout instance
@@ -39,7 +27,7 @@ public class TimeoutHandler extends TimeoutProcedureBase {
 	HashMap <TimeoutType, TimeoutProcedureBase> mTimeoutMap = new HashMap<>(); 
 	public static TimeoutHandler get(HashMap mTimeoutMap, TimeoutType key, TimeoutProcedureBase value){
 		if (!mTimeoutMap.containsKey(key)){
-			TimeoutHandler newThing = new TimeoutHandler(key,value); 
+			TimeoutHandler newThing = new TimeoutHandler(key,value); // fix please
 		}
 		if (!mTimeoutMap.containsValue(value)){
 			switch(key){
