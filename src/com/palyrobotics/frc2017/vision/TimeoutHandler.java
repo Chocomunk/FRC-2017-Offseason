@@ -7,10 +7,10 @@ public class TimeoutHandler extends TimeoutProcedureBase {
 	public static double baseValue; 
 	public static double scalarValue; 
 //TODO: More in depth README, add more methods into TimeoutProcedureBase instead of TimeoutHandler
-	public TimeoutHandler(double baseValue, double scalarValue){
+	public TimeoutHandler(double baseValue, double scalarValue) {
 		 super(baseValue, scalarValue); 
 	} 
-	public enum TimeoutType{
+	public enum TimeoutType {
 		EXPONENTIAL, 
 		LINEAR, 
 		LOGARITHMIC; 
@@ -26,10 +26,10 @@ public class TimeoutHandler extends TimeoutProcedureBase {
 	*/
 	HashMap <TimeoutType, TimeoutProcedureBase> mTimeoutMap = new HashMap<>(); 
 	public static TimeoutHandler get(HashMap mTimeoutMap, TimeoutType key, TimeoutProcedureBase value){
-		if (!mTimeoutMap.containsKey(key)){
+		if (!mTimeoutMap.containsKey(key)) {
 			TimeoutHandler newThing = new TimeoutHandler(key,value); // fix please
 		}
-		if (!mTimeoutMap.containsValue(value)){
+		if (!mTimeoutMap.containsValue(value)) {
 			switch(key){
 				case EXPONENTIAL: 
 					value = new ExponentialTimeout(baseValue,scalarValue); 
@@ -66,13 +66,5 @@ public class TimeoutHandler extends TimeoutProcedureBase {
 	
 	}*/ 
 	
-	/**
-	* Function of the count of failures
-	* @param numFailures
-	* @return sleep time
-	*/
-	public int getFailureTime(int numFailures){
-		return numFailures * 100; 
-	}
 }
 
