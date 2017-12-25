@@ -14,9 +14,12 @@ public abstract class TimeoutProcedureBase {
 		numFailures++;
 	}
 	
-	private int getDuration(int failureCount) { // TODO: change multiplier constant based on type of procedure
-		return failureCount * 100;
-	}
+	/**
+	 * Returns duration of timeout
+	 * @param failureCount
+	 * @return Length of time to wait
+	 */
+	public abstract int getDuration(int failureCount);
 	public void doWait(){
 		try {
 			Thread.sleep(getDuration(numFailures));

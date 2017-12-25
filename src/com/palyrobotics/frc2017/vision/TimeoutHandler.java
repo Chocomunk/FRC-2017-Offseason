@@ -27,7 +27,7 @@ public class TimeoutHandler extends TimeoutProcedureBase {
 	HashMap <TimeoutType, TimeoutProcedureBase> mTimeoutMap = new HashMap<>(); 
 	public static TimeoutHandler get(HashMap mTimeoutMap, TimeoutType key, TimeoutProcedureBase value){
 		if (!mTimeoutMap.containsKey(key)) {
-			TimeoutHandler newThing = new TimeoutHandler(key,value); // fix please
+			TimeoutHandler newThing = new TimeoutHandler(key,value); // fix pls
 		}
 		if (!mTimeoutMap.containsValue(value)) {
 			switch(key){
