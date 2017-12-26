@@ -57,7 +57,6 @@ public class TimeoutHandler extends TimeoutProcedureBase {
 					value = new LinearTimeout(baseValue, scalarValue); 
 				case LOGARITHMIC: 
 					value = new LogarithmicTimeout(baseValue, scalarValue); 
-				
 			}
 		}
 		else{
@@ -91,8 +90,5 @@ public class TimeoutHandler extends TimeoutProcedureBase {
 	* @param numFailures
 	* @return sleep time
 	*/
-	public int getFailureTime(int numFailures){
-		return numFailures * 100; 
-	}
 }
 
