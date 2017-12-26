@@ -8,25 +8,28 @@ public abstract class TimeoutProcedureBase {
 		this.scalarValue = scalarValue; 
 	}
 	public void success(){
-		succeed();
+		numFailures = 0;
 	}
 	public void failure(){
-		
+		numFailures++;
 	}
-	public boolean didSucceed(){
-		return true; 
-	}
-	public double doWait(){
-		return 0; 
-	}
-	public boolean succeed(){
-		return true; 
-	}
-	public double getDuration(){
-		return 0; 
+	
+	/**
+	 * Returns duration of timeout
+	 * @param failureCount
+	 * @return Length of time to wait
+	 */
+	public abstract int getDuration(int failureCount);
+	public void doWait(){
+		try {
+			Thread.sleep(getDuration(numFailures));
+			System.out.println(getDuration(numFailures));
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 	}
 	protected double getBaseValue(){
-		return 0; 
+		return baseValue; 
 	}
 	public static int numFailures; 
 }

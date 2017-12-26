@@ -7,36 +7,16 @@ public class TimeoutHandler extends TimeoutProcedureBase {
 	public static double baseValue; 
 	public static double scalarValue; 
 //TODO: More in depth README, add more methods into TimeoutProcedureBase instead of TimeoutHandler
-	public TimeoutHandler(double baseValue, double scalarValue){
+	public TimeoutHandler(double baseValue, double scalarValue) {
 		 super(baseValue, scalarValue); 
 	} 
-	public enum TimeoutType{
+	public enum TimeoutType {
 		EXPONENTIAL, 
 		LINEAR, 
 		LOGARITHMIC; 
 	}
 	TimeoutType currType; 
-	public int initialMill = 0; 
-	
-	/**
-	* Resets the number of failures to 0
-	*/
-	public void success(){
-		numFailures = 0; 
-	}
-	/**
-	* Increments the number of failures
-	* Sleeps the code based on the number of failures
-	*/
-	public void failure(){
-		numFailures++;
-		try {
-			Thread.sleep(getFailureTime(numFailures));
-			System.out.println(getFailureTime(numFailures) - initialMill);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-	}
+	public int initialMill = 0; 	
 	
 	/**
 	* Returns a unique timeout instance
@@ -46,10 +26,10 @@ public class TimeoutHandler extends TimeoutProcedureBase {
 	*/
 	HashMap <TimeoutType, TimeoutProcedureBase> mTimeoutMap = new HashMap<>(); 
 	public static TimeoutHandler get(HashMap mTimeoutMap, TimeoutType key, TimeoutProcedureBase value){
-		if (!mTimeoutMap.containsKey(key)){
-			TimeoutHandler newThing = new TimeoutHandler(key,value); 
+		if (!mTimeoutMap.containsKey(key)) {
+			TimeoutHandler newThing = new TimeoutHandler(key,value); // fix pls
 		}
-		if (!mTimeoutMap.containsValue(value)){
+		if (!mTimeoutMap.containsValue(value)) {
 			switch(key){
 				case EXPONENTIAL: 
 					value = new ExponentialTimeout(baseValue,scalarValue); 
@@ -85,10 +65,13 @@ public class TimeoutHandler extends TimeoutProcedureBase {
 	
 	}*/ 
 	
+<<<<<<< HEAD
 	/**
 	* Function of the count of failures
 	* @param numFailures
 	* @return sleep time
 	*/
+=======
+>>>>>>> 936f744dd9473c4bcd8ad17fbcf824fbe82f1b0a
 }
 
