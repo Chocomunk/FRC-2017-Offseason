@@ -24,27 +24,27 @@ public class TimeoutHandler extends TimeoutProcedureBase {
 	* @return TimeoutProcedureBase
 	*/
 	public static HashMap<String, TimeoutProcedureBase> mTimeoutMap = new HashMap<>();  
-	public static TimeoutProcedureBase get(String key, TimeoutProcedureBase value){
-		if (!mTimeoutMap.containsKey(key)) {
-			mTimeoutMap.put("default", value); 
+	public static TimeoutProcedureBase get(String key, TimeoutType value){
+		TimeoutHandler base = new TimeoutHandler(baseValue, scalarValue);
+		if (!mTimeoutMap.containsKey(key)) { 
+			mTimeoutMap.put("default", base); 
 		}
 		if (!mTimeoutMap.containsValue(value)){
 			switch(key){
 				case "EXPONENTIAL": 
-					value = new ExponentialTimeout(baseValue,scalarValue); 
+					value = TimeoutType.EXPONENTIAL; 
 				case "LINEAR": 
-					value = new LinearTimeout(baseValue, scalarValue); 
+					value = TimeoutType.LINEAR;  
 				case "LOGARITHMIC": 
-					value = new LogarithmicTimeout(baseValue, scalarValue); 
+					value = TimeoutType.LOGARITHMIC; 
 			}
 			 
 		}
-		mTimeoutMap.put(key, value);
-		return value; 
+		mTimeoutMap.put(key, base);
+		return base; 
 	}
-	@Override
 	public int getDuration(int mFailureCount) {
-		return mFailureCount * 100; 
+		return 0; 
 	}
 	
 	

@@ -7,6 +7,6 @@ public class LogarithmicTimeout extends TimeoutHandler {
 		super(baseValue, scalarValue);
 	}
 	public int getDuration(int mFailureCount) { 
-		return (int) Math.log(mFailureCount);
+		return (int) Math.log(mFailureCount) * 100;
 	}
 }
