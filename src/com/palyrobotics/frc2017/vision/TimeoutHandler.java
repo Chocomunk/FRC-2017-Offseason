@@ -31,7 +31,7 @@ public class TimeoutHandler extends TimeoutProcedureBase {
 		}
 		if (!mTimeoutMap.containsValue(value)){
 			switch(key){
-				case "EXPONENTIAL": 
+				case "nexus_connected": 
 					value = TimeoutType.EXPONENTIAL; 
 				case "LINEAR": 
 					value = TimeoutType.LINEAR;  

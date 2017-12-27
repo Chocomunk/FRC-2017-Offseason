@@ -8,11 +8,13 @@ public TimeoutExecutor(double baseValue, double scalarValue){
 }
 public static void main(String[]args){
 	TimeoutProcedureBase proc = TimeoutHandler.get("nexus_connected", TimeoutHandler.TimeoutType.LINEAR);
-		while(((TimeoutHandler) proc).getFailureTime(numFailures)  < 1000){
+		while(((TimeoutHandler) proc).getDuration(numFailures)  < 1000){
 			try {
 				assert 1 + 1 == 3;
 				proc.success();	// Clear failure count and move on
+				System.out.println("wrong");
 			} catch (AssertionError e) {
+				System.out.println("right");
 				proc.failure();	// Increment failure count and then do a wait
 			}
 		
