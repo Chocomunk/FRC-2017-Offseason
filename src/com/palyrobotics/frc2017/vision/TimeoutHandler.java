@@ -2,11 +2,10 @@ package com.palyrobotics.frc2017.vision;
 
 import java.util.HashMap;
 import com.palyrobotics.frc2017.vision.procedures.*; 
-
+//TODO: More in depth README, add more methods into TimeoutProcedureBase instead of TimeoutHandler
 public class TimeoutHandler extends TimeoutProcedureBase {
 	public static double baseValue; 
 	public static double scalarValue; 
-//TODO: More in depth README, add more methods into TimeoutProcedureBase instead of TimeoutHandler
 	public TimeoutHandler(double baseValue, double scalarValue) {
 		 super(baseValue, scalarValue); 
 	} 
@@ -24,54 +23,30 @@ public class TimeoutHandler extends TimeoutProcedureBase {
 	* @param currTimeoutType
 	* @return TimeoutProcedureBase
 	*/
-	HashMap <TimeoutType, TimeoutProcedureBase> mTimeoutMap = new HashMap<>(); 
-	public static TimeoutHandler get(HashMap mTimeoutMap, TimeoutType key, TimeoutProcedureBase value){
+	public static HashMap<String, TimeoutProcedureBase> mTimeoutMap = new HashMap<>();  
+	public static TimeoutProcedureBase get(String key, TimeoutProcedureBase value){
 		if (!mTimeoutMap.containsKey(key)) {
-			TimeoutHandler newThing = new TimeoutHandler(key,value); // fix pls
+			mTimeoutMap.put("default", value); 
 		}
-		if (!mTimeoutMap.containsValue(value)) {
+		if (!mTimeoutMap.containsValue(value)){
 			switch(key){
-				case EXPONENTIAL: 
+				case "EXPONENTIAL": 
 					value = new ExponentialTimeout(baseValue,scalarValue); 
-				case LINEAR: 
+				case "LINEAR": 
 					value = new LinearTimeout(baseValue, scalarValue); 
-				case LOGARITHMIC: 
+				case "LOGARITHMIC": 
 					value = new LogarithmicTimeout(baseValue, scalarValue); 
 			}
-		}
-		else{
-			//Should set to some default procedure type
 			 
 		}
-		TimeoutHandler randomThing = new TimeoutHandler(0,0); 
-		return randomThing; 
+		mTimeoutMap.put(key, value);
+		return value; 
 	}
-	/*public static TimeoutHandler get(String key, TimeoutType currTimeoutType){
-		if(currTimeoutType == null){
-			currTimeoutType = TimeoutType.DEFAULT;
-		}
-		
-		if (key == "nexus_connected"){
-			currTimeoutType = TimeoutType.LINEAR;
-			TimeoutHandler nexus = new TimeoutHandler(0,0); 
-			return nexus; 
-		}
-		else{
-			key = "key for default??";
-			TimeoutHandler newHandler = new TimeoutHandler(0,0); 
-			return newHandler; 
-		}
+	@Override
+	public int getDuration(int mFailureCount) {
+		return mFailureCount * 100; 
+	}
 	
 	
-	}*/ 
-	
-<<<<<<< HEAD
-	/**
-	* Function of the count of failures
-	* @param numFailures
-	* @return sleep time
-	*/
-=======
->>>>>>> 936f744dd9473c4bcd8ad17fbcf824fbe82f1b0a
 }
 
