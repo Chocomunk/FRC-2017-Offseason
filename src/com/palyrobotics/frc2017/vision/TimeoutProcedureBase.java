@@ -7,9 +7,17 @@ public abstract class TimeoutProcedureBase {
 		this.baseValue = baseValue; 
 		this.scalarValue = scalarValue; 
 	}
+	
+	/**
+	 * Resets numFailures to 0
+	 */
 	public void success(){
 		numFailures = 0;
 	}
+	
+	/**
+	 * Adds a failure to numFailures
+	 */
 	public void failure(){
 		numFailures++;
 	}
@@ -20,6 +28,10 @@ public abstract class TimeoutProcedureBase {
 	 * @return Length of time to wait
 	 */
 	public abstract int getDuration(int failureCount);
+	
+	/**
+	 * Sleeps program based on procedure type and failure count
+	 */
 	public void doWait(){
 		try {
 			Thread.sleep(getDuration(numFailures));
@@ -28,8 +40,10 @@ public abstract class TimeoutProcedureBase {
 			e.printStackTrace();
 		}
 	}
+	
 	protected double getBaseValue(){
 		return baseValue; 
 	}
+	
 	public static int numFailures; 
 }
