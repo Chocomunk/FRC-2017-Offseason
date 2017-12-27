@@ -20,6 +20,7 @@ public abstract class TimeoutProcedureBase {
 	 */
 	public void failure(){
 		numFailures++;
+		doWait();
 	}
 	
 	/**
