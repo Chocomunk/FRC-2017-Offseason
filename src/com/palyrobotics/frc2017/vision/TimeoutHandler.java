@@ -31,9 +31,9 @@ public class TimeoutHandler extends TimeoutProcedureBase {
 		}
 		if (!mTimeoutMap.containsValue(value)){
 			switch(key){
-				case "nexus_connected": 
+				case "EXPONENTIAL": 
 					value = TimeoutType.EXPONENTIAL; 
-				case "LINEAR": 
+				case "nexus_connected": 
 					value = TimeoutType.LINEAR;  
 				case "LOGARITHMIC": 
 					value = TimeoutType.LOGARITHMIC; 
@@ -44,7 +44,7 @@ public class TimeoutHandler extends TimeoutProcedureBase {
 		return base; 
 	}
 	public int getDuration(int mFailureCount) {
-		return 0; 
+		return 1; 
 	}
 	
 	

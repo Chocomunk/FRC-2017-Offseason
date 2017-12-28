@@ -12,10 +12,11 @@ public static void main(String[]args){
 			try {
 				assert 1 + 1 == 3;
 				proc.success();	// Clear failure count and move on
-				System.out.println("wrong");
+				System.out.println("successful");
 			} catch (AssertionError e) {
 				System.out.println("right");
 				proc.failure();	// Increment failure count and then do a wait
+				proc.doWait(); 
 			}
 		
 		}
