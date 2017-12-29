@@ -14,7 +14,7 @@ public class TimeoutHandler extends TimeoutProcedureBase {
 		LINEAR, 
 		LOGARITHMIC; 
 	}
-	TimeoutType currType; 
+	static TimeoutType currType; 
 	public int initialMill = 0; 	
 	
 	/**
@@ -32,10 +32,13 @@ public class TimeoutHandler extends TimeoutProcedureBase {
 		if (!mTimeoutMap.containsValue(value)){
 			switch(key){
 				case "EXPONENTIAL": 
+					currType = TimeoutType.EXPONENTIAL; 
 					value = TimeoutType.EXPONENTIAL; 
 				case "nexus_connected": 
+					currType = TimeoutType.LINEAR;
 					value = TimeoutType.LINEAR;  
 				case "LOGARITHMIC": 
+					currType = TimeoutType.LOGARITHMIC;
 					value = TimeoutType.LOGARITHMIC; 
 			}
 			 
@@ -44,7 +47,16 @@ public class TimeoutHandler extends TimeoutProcedureBase {
 		return base; 
 	}
 	public int getDuration(int mFailureCount) {
-		return 1; 
+		switch(currType){
+		case EXPONENTIAL:
+			return (int)Math.pow(2, mFailureCount) * 100;
+		case LINEAR:
+			return mFailureCount * 100; 
+		case LOGARITHMIC:
+			return (int) Math.log(mFailureCount) * 100;
+		default:
+			return 0; 
+		}
 	}
 	
 	
