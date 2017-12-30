@@ -35,7 +35,7 @@ public abstract class TimeoutProcedureBase {
 	public void doWait(){
 		try {
 			Thread.sleep(getDuration(numFailures));
-			System.out.println(getDuration(numFailures));
+			System.out.println("sleeping for: " + getDuration(numFailures));
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}

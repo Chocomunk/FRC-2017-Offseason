@@ -34,12 +34,15 @@ public class TimeoutHandler extends TimeoutProcedureBase {
 				case "EXPONENTIAL": 
 					currType = TimeoutType.EXPONENTIAL; 
 					value = TimeoutType.EXPONENTIAL; 
+					break; 
 				case "nexus_connected": 
 					currType = TimeoutType.LINEAR;
 					value = TimeoutType.LINEAR;  
+					break; 
 				case "LOGARITHMIC": 
 					currType = TimeoutType.LOGARITHMIC;
 					value = TimeoutType.LOGARITHMIC; 
+					break; 
 			}
 			 
 		}
